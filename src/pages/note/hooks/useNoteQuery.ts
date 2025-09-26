@@ -3,6 +3,9 @@ import {useNoteStore} from './useNoteStore';
 import {useQuery} from '@tanstack/react-query';
 import {NoteSchema, type Note} from '@/schemas';
 
+//@ts-ignore
+const url=import.meta.env.VITE_API_URL as string;
+
 export const useNoteQuery = () => {
     const {accessToken} = useAuthStore();
     const {selectedNoteId} = useNoteStore();
@@ -10,7 +13,7 @@ export const useNoteQuery = () => {
     return useQuery({
         queryKey: ['note', selectedNoteId],
         queryFn: async () => {
-            const res = await fetch(`/api/note/${selectedNoteId}`, {
+            const res = await fetch(url+`/api/note/${selectedNoteId}`, {
                 headers: {Authorization: `Bearer ${accessToken}`},
             });
             if (!res.ok) throw new Error('Failed to fetch note');

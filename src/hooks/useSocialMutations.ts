@@ -2,12 +2,14 @@ import {useMutation} from '@tanstack/react-query';
 import {queryClient} from '@/lib/react-query.ts';
 import {useAuthStore} from '@/pages/dashboard/hooks/useAuthStore.ts';
 
+//@ts-ignore
+const url=import.meta.env.VITE_API_URL as string;
 export const useFollowMutation = () => {
     const {accessToken} = useAuthStore();
     return useMutation({
         mutationKey: ['follow'],
         mutationFn: async (id: string) => {
-            const res = await fetch(`/api/social/follow/${id}`, {
+            const res = await fetch(url+`/api/social/follow/${id}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -29,7 +31,7 @@ export const useUnfollowMutation = () => {
     return useMutation({
         'mutationKey': ['unfollow'],
         'mutationFn': async (id: string) => {
-            const res = await fetch(`/api/social/unfollow/${id}`, {
+            const res = await fetch(url+`/api/social/unfollow/${id}`, {
                 'method': 'POST',
                 'headers': {
                     'Content-Type': 'application/json',

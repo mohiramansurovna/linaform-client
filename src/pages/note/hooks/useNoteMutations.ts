@@ -3,6 +3,9 @@ import {type Note, type UpdateNote} from '@/schemas';
 import {useMutation, useQueryClient} from '@tanstack/react-query';
 import {useNoteStore} from './useNoteStore';
 
+//@ts-ignore
+const url=import.meta.env.VITE_API_URL as string;
+
 export const useCreateNote = () => {
     const queryClient=useQueryClient();
     const {accessToken}=useAuthStore();
@@ -10,7 +13,7 @@ export const useCreateNote = () => {
     return useMutation({
         mutationKey:['createNote'],
         mutationFn:async()=>{
-            return await fetch('/api/note/', {
+            return await fetch(url+'/api/note/', {
                 method: 'POST',
                 headers:{
                     Authorization:`Bearer ${accessToken}`,
@@ -36,7 +39,7 @@ export const useUpdateNote = () => {
     return useMutation({
         mutationKey: ['updateNote'],
         mutationFn: async ({id, ...data}: {id: string} & UpdateNote) => {
-            await fetch(`/api/note/${id}`, {
+            await fetch(url+`/api/note/${id}`, {
                 method: 'PUT',
                 headers: {
                     Authorization: `Bearer ${accessToken}`,
@@ -65,7 +68,7 @@ export const useDeleteNote = () => {
     return useMutation({
         mutationKey: ['deleteNote'],
         mutationFn: async (id: string) => {
-            await fetch(`/api/note/${id}`, {
+            await fetch(url+`/api/note/${id}`, {
                 method: 'DELETE',
                 headers: {
                     Authorization: `Bearer ${accessToken}`,

@@ -6,14 +6,14 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 export default defineConfig({
     base: '/linaform-client/',
     plugins: [react(), tailwindcss(), tsconfigPaths()],
-    server: {
-        host: '0.0.0.0',
-        proxy: {
-            '/api': {
-                target: 'https://linaform-server.onrender.com/',
-                changeOrigin: true,
-                rewrite: path => path.replace(/^\/api/, '/api'),
-            },
-        },
-    },
+    // server: {
+    //     host: '0.0.0.0',
+    //     proxy: {
+    //         '/api': {
+    //             target: 'https://linaform-server.onrender.com/',
+    //             changeOrigin: true,
+    //             rewrite: path => path.replace(/^\/api/, '/api'),
+    //         },
+    //     },
+    // },
 });

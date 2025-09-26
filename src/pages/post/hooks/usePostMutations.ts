@@ -2,6 +2,10 @@ import {useMutation, useQueryClient} from '@tanstack/react-query';
 import {useAuthStore} from '@/pages/dashboard/hooks/useAuthStore.ts';
 import {useParams} from 'react-router';
 
+
+//@ts-ignore
+const url=import.meta.env.VITE_API_URL as string;
+
 export const usePostComment = () => {
     const queryClient = useQueryClient();
     const {accessToken} = useAuthStore();
@@ -9,7 +13,7 @@ export const usePostComment = () => {
     return useMutation({
         mutationKey: ['postComment', id],
         mutationFn: async (content: string) => {
-            return await fetch(`/api/post/${id}/comment`, {
+            return await fetch(url+`/api/post/${id}/comment`, {
                 method: 'POST',
                 headers: {
                     Authorization: `Bearer ${accessToken}`,
@@ -39,7 +43,7 @@ export const usePostView = () => {
     return useMutation({
         mutationKey: ['postView', id],
         mutationFn: async () => {
-            return await fetch(`/api/post/${id}/view`, {
+            return await fetch(url+`/api/post/${id}/view`, {
                 method: 'POST',
             }).then(async res => {
                 if (!res.ok) {
@@ -56,7 +60,7 @@ export const usePostLike = () => {
     return useMutation({
         mutationKey: ['postLike', id],
         mutationFn: async () => {
-            return await fetch(`/api/post/${id}/like`, {
+            return await fetch(url+`/api/post/${id}/like`, {
                 method: 'POST',
                 headers: {
                     Authorization: `Bearer ${accessToken}`,
@@ -74,7 +78,7 @@ export const usePostUnlike = () => {
     return useMutation({
         mutationKey: ['postUnlike'],
         mutationFn: async (id: string) => {
-            return await fetch(`/api/post/${id}/unlike`, {
+            return await fetch(url+`/api/post/${id}/unlike`, {
                 method: 'POST',
                 headers: {
                     Authorization: `Bearer ${accessToken}`,

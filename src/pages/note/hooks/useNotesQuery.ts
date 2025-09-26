@@ -8,14 +8,15 @@ type NotesResponse = {
     page: number;
     limit: number;
 };
-
+//@ts-ignore
+const url=import.meta.env.VITE_API_URL as string;
 export const useNotesQuery = (page: number, limit = 7) => {
     const { accessToken } = useAuthStore();
 
     return useQuery<NotesResponse>({
         queryKey: ['notes', page],
         queryFn: async () => {
-            const res = await fetch(`/api/note?page=${page}&limit=${limit}`, {
+            const res = await fetch(url+`/api/note?page=${page}&limit=${limit}`, {
                 headers: {
                     Authorization: `Bearer ${accessToken}`,
                 },
@@ -34,7 +35,7 @@ export const useNotesSearchQuery = (search: string, page:number, limit=7) =>{
     return useQuery<NotesResponse>({
         queryKey:['notesSearch', search, page],
         queryFn:async()=>{
-            return await fetch(`/api/note/search?term=${search}&page=${page}&limit=${limit}`,{
+            return await fetch(url+`/api/note/search?term=${search}&page=${page}&limit=${limit}`,{
                 headers:{
                     Authorization:`Bearer ${accessToken}`,
                 }

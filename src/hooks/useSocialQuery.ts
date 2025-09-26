@@ -2,13 +2,16 @@ import {useInfiniteQuery, useQuery} from '@tanstack/react-query';
 import {useAuthStore} from '@/pages/dashboard/hooks/useAuthStore.ts';
 import type {Post, User} from '@/schemas.ts';
 
+
+//@ts-ignore
+const url=import.meta.env.VITE_API_URL as string;
 export const useLikedPostsQuery = () => {
     const { accessToken } = useAuthStore();
 
     return useInfiniteQuery({
         queryKey: ['likedPosts'],
         queryFn: async ({ pageParam = 1 }) => {
-            const res = await fetch(`/api/social/likedPosts/${pageParam}`, {
+            const res = await fetch(url+`/api/social/likedPosts/${pageParam}`, {
                 headers: {
                     Authorization: `Bearer ${accessToken}`,
                 },
@@ -28,7 +31,7 @@ export const useAuthorsQuery = () => {
     return useQuery({
         queryKey: ['following'],
         queryFn: async () => {
-            const res = await fetch(`/api/social/following`, {
+            const res = await fetch(url+`/api/social/following`, {
                 headers: {
                     Authorization: `Bearer ${accessToken}`,
                 },
@@ -57,7 +60,7 @@ export const useUserQuery = (userId:string|null) => {
     return useQuery({
         queryKey: ['user'],
         queryFn: async () => {
-            const res = await fetch('/api/social/user/'+userId);
+            const res = await fetch(url+'/api/social/user/'+userId);
             return await res.json() as SelectedUser;
         },
         //BBUILD:make it faster
@@ -69,7 +72,7 @@ export const useAuthorPosts=(authorId:string|null)=>{
     return useInfiniteQuery({
         queryKey: ['authorPosts'],
         queryFn: async ({ pageParam = 1 }) => {
-            const res = await fetch(`/api/social/authorPosts/${authorId}/${pageParam}`);
+            const res = await fetch(url+`/api/social/authorPosts/${authorId}/${pageParam}`);
             return await res.json() as { posts:Post[]; nextPage: number | null };
         },
         initialPageParam: 1,

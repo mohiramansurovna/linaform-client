@@ -1,9 +1,12 @@
 import {useQuery} from '@tanstack/react-query';
 import {type AccessToken, AccessTokenSchema} from '@/schemas';
 
+
+//@ts-ignore
+const url=import.meta.env.VITE_API_URL as string;
 export const useRefreshTokenQuery = () => {
     const fetchAccessToken = async () => {
-        return await fetch('/api/auth/refresh', {
+        return await fetch(url+'/api/auth/refresh', {
             method: 'POST',
             credentials: 'include',
         }).then(async res => {

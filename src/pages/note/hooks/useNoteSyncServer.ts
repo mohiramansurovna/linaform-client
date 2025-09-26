@@ -39,13 +39,16 @@ export const useNoteSyncServer = () => {
     useEffect(() => {
         if (!editor || !selectedNoteId || !accessToken) return;
         const handleUnload = () => {
+
+            //@ts-ignore
+            const url = import.meta.env.VITE_API_URL as string;
             try {
                 const json = editor.getJSON();
                 const blob = new Blob(
                     [JSON.stringify({note: {id: selectedNoteId, content: json}, accessToken})],
                     {type: 'application/json'},
                 );
-                navigator.sendBeacon(`/api/note/autosave`, blob);
+                navigator.sendBeacon(url + `/api/note/autosave`, blob);
             } catch {
                 console.error('Failed to send autosave request');
             }

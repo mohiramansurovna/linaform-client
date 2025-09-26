@@ -2,11 +2,15 @@ import {useAuthStore} from '@/pages/dashboard/hooks/useAuthStore';
 import type {LoginResponceSchema, LoginSchema} from '@/schemas';
 import {useMutation} from '@tanstack/react-query';
 import {z} from 'zod';
+
+//@ts-ignore
+const url=import.meta.env.VITE_API_URL as string;
+
 export function useLoginMutation() {
     const {setAuth} = useAuthStore();
     return useMutation({
         mutationFn: async (data: z.infer<typeof LoginSchema>) => {
-            return await fetch('/api/auth/login', {
+            return await fetch(url+'/api/auth/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

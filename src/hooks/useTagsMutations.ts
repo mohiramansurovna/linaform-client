@@ -1,9 +1,12 @@
 import {useMutation} from '@tanstack/react-query';
 
+//@ts-ignore
+const url=import.meta.env.VITE_API_URL as string;
+
 export const useTagsCreate = () => {
     return useMutation({
         mutationFn: async (label:string) => {
-            const res=await fetch('/api/tags', {
+            const res=await fetch(url+'/api/tags', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -22,7 +25,7 @@ export const useTagsCreate = () => {
 }
 
 export const useTagsDelete = () => useMutation({mutationFn: async (id:string) => {
-   await fetch(`/api/tags/${id}`, {
+   await fetch(url+`/api/tags/${id}`, {
         method: 'DELETE',
     })
 }});
