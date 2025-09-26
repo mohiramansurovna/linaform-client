@@ -4,9 +4,10 @@ import tailwindcss from '@tailwindcss/vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
 // https://vite.dev/config/
 export default defineConfig({
+    base: '/linaform-client/',
     plugins: [react(), tailwindcss(), tsconfigPaths()],
     server: {
-        host:'0.0.0.0',
+        host: '0.0.0.0',
         proxy: {
             '/api': {
                 target: 'https://linaform-server.onrender.com/',

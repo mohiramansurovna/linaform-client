@@ -31,4 +31,8 @@ export const router = createBrowserRouter([
             }
         ],
     },
-]);
+],
+    {
+        basename: "/linaform-client" // Match your repo name
+    }
+    );
