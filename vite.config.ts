@@ -9,7 +9,7 @@ export default defineConfig({
         host:'0.0.0.0',
         proxy: {
             '/api': {
-                target: 'http://localhost:3001',
+                target: 'https://linaform-server.onrender.com/',
                 changeOrigin: true,
                 rewrite: path => path.replace(/^\/api/, '/api'),
             },
