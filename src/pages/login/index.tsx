@@ -1,6 +1,7 @@
 import { CardContent, Card } from '@/components/ui/card';
 import {LoginForm} from './ui/login-form';
 import {LoginImage} from './ui/login-image';
+import { Link } from 'react-router';
 export default function LoginPage() {
     return (
         <div className='bg-muted flex min-h-svh flex-col items-center justify-center p-6 md:p-10'>
@@ -12,9 +13,9 @@ export default function LoginPage() {
                             <LoginImage/>
                         </CardContent>
                     </Card>
-                    <div className='text-muted-foreground *:[a]:hover:text-primary text-center text-xs text-balance *:[a]:underline *:[a]:underline-offset-4'>
-                        By clicking continue, you agree to our <a href='#'>Terms of Service</a> and{' '}
-                        <a href='#'>Privacy Policy</a>.
+                    <div className='text-muted-foreground text-center text-xs text-balance'>
+                        By clicking continue, you agree to our <Link className='hover:text-primary underline underline-offset-4' to='#'>Terms of Service</Link> and{' '}
+                        <Link className='hover:text-primary underline underline-offset-4' to='#'>Privacy Policy</Link>.
                     </div>
                 </div>
             </div>

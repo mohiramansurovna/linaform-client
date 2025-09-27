@@ -3,7 +3,7 @@ import {useUpdateNote} from "@/pages/note/hooks/useNoteMutations.ts";
 import {useNoteQuery} from "@/pages/note/hooks/useNoteQuery.ts";
 import {useNoteStore} from "@/pages/note/hooks/useNoteStore.ts";
 import {useNoteSyncLocal} from "@/pages/note/hooks/useNoteSyncLocal.ts";
-import {useCurrentEditor} from "@tiptap/react";
+import {type Editor} from "@tiptap/react";
 import {useEffect, useState} from "react";
 import isEqual from "lodash.isequal";
 
@@ -21,12 +21,11 @@ import isEqual from "lodash.isequal";
  *   `useNoteQuery`, `useNoteSyncLocal`, and `useUpdateNote` for accessing editor state,
  *   authentication, notes data, and synchronization utilities.
  */
-export const useNoteSyncServer = () => {
-    const {editor} = useCurrentEditor();
+export const useNoteSyncServer = (editor:Editor) => {
     const {accessToken} = useAuthStore();
     const {selectedNoteId} = useNoteStore();
     const {data: note} = useNoteQuery();
-    const {getLocalSync, localSyncStatus} = useNoteSyncLocal();
+    const {getLocalSync, localSyncStatus} = useNoteSyncLocal(editor);
     const updateNote = useUpdateNote();
     const [serverSyncStatus, setServerSyncStatus] = useState<'upToDate' | 'behind' | 'loading' | 'error'>('upToDate');
     /**

@@ -1,14 +1,13 @@
 import {debounce} from "@/lib/debounce.ts";
 import {useNoteStore} from "@/pages/note/hooks/useNoteStore.ts";
-import {useCurrentEditor} from "@tiptap/react";
+import {type Editor} from "@tiptap/react";
 import {useCallback, useEffect, useMemo, useRef, useState} from "react";
 /**
  * A custom hook that handles the local synchronization of note content with the browser's localStorage.
  * It monitors editor updates, saves note content locally, and provides the synchronization status.
  */
-export const useNoteSyncLocal = () => {
+export const useNoteSyncLocal = (editor:Editor) => {
     const {selectedNoteId} = useNoteStore();
-    const {editor} = useCurrentEditor();
     const [localSyncStatus, setLocalSyncStatus] = useState<'saving' | 'saved' | 'idle'>('idle');
     /**
      * OPTIMIZE: replace custom debounce with `use-debounce` or `useDebouncedCallback` to avoid stale closure bugs

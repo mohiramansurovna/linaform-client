@@ -1,5 +1,3 @@
-import {useMutation} from '@tanstack/react-query';
-import {useAuthStore} from '@/pages/dashboard/hooks/useAuthStore';
 import {Avatar, AvatarImage, AvatarFallback} from '@/components/ui/avatar';
 import {
     DropdownMenu,
@@ -7,39 +5,19 @@ import {
     DropdownMenuContent,
     DropdownMenuLabel,
     DropdownMenuSeparator,
-    DropdownMenuGroup,
     DropdownMenuItem,
 } from '@/components/ui/dropdown-menu';
 import {
     ChevronsUpDown,
-    Sparkles,
-    BadgeCheck,
-    CreditCard,
-    Bell,
     LogOut,
     Loader2,
 } from 'lucide-react';
 import {useSidebar, SidebarMenu, SidebarMenuItem, SidebarMenuButton} from './ui/sidebar';
+import {useLogoutMutation} from '@/pages/login/hooks/useLogoutMutation.ts';
 export function NavUser({user}: {user: {name: string; email: string; avatar: string}}) {
     const {isMobile} = useSidebar();
-    const {clearAuth} = useAuthStore();
 
-    const logoutMutation = useMutation({
-        mutationKey: ['logout'],
-        mutationFn: async () => {
-            const res = await fetch('/api/auth/logout', {
-                method: 'POST',
-                credentials: 'include',
-            });
-            if (!res.ok) throw new Error('Logout failed');
-        },
-        onSuccess: () => {
-            clearAuth();
-        },
-        onError: err => {
-            console.error('Logout failed', err);
-        },
-    });
+    const logoutMutation = useLogoutMutation()
 
     return (
         <SidebarMenu>
@@ -78,28 +56,28 @@ export function NavUser({user}: {user: {name: string; email: string; avatar: str
                             </div>
                         </DropdownMenuLabel>
                         <DropdownMenuSeparator />
-                        <DropdownMenuGroup>
-                            <DropdownMenuItem>
-                                <Sparkles />
-                                Upgrade to Pro
-                            </DropdownMenuItem>
-                        </DropdownMenuGroup>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuGroup>
-                            <DropdownMenuItem>
-                                <BadgeCheck />
-                                Account
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>
-                                <CreditCard />
-                                Billing
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>
-                                <Bell />
-                                Notifications
-                            </DropdownMenuItem>
-                        </DropdownMenuGroup>
-                        <DropdownMenuSeparator />
+                        {/*<DropdownMenuGroup>*/}
+                        {/*    <DropdownMenuItem>*/}
+                        {/*        <Sparkles />*/}
+                        {/*        Upgrade to Pro*/}
+                        {/*    </DropdownMenuItem>*/}
+                        {/*</DropdownMenuGroup>*/}
+                        {/*<DropdownMenuSeparator />*/}
+                        {/*<DropdownMenuGroup>*/}
+                        {/*    <DropdownMenuItem>*/}
+                        {/*        <BadgeCheck />*/}
+                        {/*        Account*/}
+                        {/*    </DropdownMenuItem>*/}
+                        {/*    <DropdownMenuItem>*/}
+                        {/*        <CreditCard />*/}
+                        {/*        Billing*/}
+                        {/*    </DropdownMenuItem>*/}
+                        {/*    <DropdownMenuItem>*/}
+                        {/*        <Bell />*/}
+                        {/*        Notifications*/}
+                        {/*    </DropdownMenuItem>*/}
+                        {/*</DropdownMenuGroup>*/}
+                        {/*<DropdownMenuSeparator />*/}
                         <DropdownMenuItem onClick={() => logoutMutation.mutate()}>
                             <LogOut />
                             Log out

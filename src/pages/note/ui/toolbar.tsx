@@ -1,4 +1,4 @@
-import {useCurrentEditor} from '@tiptap/react';
+import {type Editor} from '@tiptap/react';
 import {Tabs, TabsList, TabsContent, TabsTrigger} from '@/components/ui/tabs.tsx';
 import React, {useMemo, useState, lazy,} from 'react';
 import Metadata from "@/pages/note/ui/tool/metadata.tsx";
@@ -15,8 +15,7 @@ const Insert = lazy(() => import('@/pages/note/ui/tool/insert.tsx'));
 
 type NavState = 'file' | 'text' | 'font' | 'structure' | 'list' | 'insert';
 
-function Toolbar() {
-    const {editor} = useCurrentEditor();
+function Toolbar({editor}:{editor:Editor}) {
     const {selectedNoteId} = useNoteStore();
     const tabs = useMemo(
         () => [

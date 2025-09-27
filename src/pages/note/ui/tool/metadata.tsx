@@ -9,8 +9,8 @@ import {useNoteQuery} from '../../hooks/useNoteQuery.ts';
 
 function Metadata({editor}: { editor: Editor }) {
     const {data: note} = useNoteQuery();
-    const {localSyncStatus} = useNoteSyncLocal();
-    const {serverSyncStatus, syncToServer} = useNoteSyncServer();
+    const {localSyncStatus} = useNoteSyncLocal(editor);
+    const {serverSyncStatus, syncToServer} = useNoteSyncServer(editor);
     return (
         note && (
             <>

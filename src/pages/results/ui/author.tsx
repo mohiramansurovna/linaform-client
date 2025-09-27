@@ -2,7 +2,7 @@ import {useAuthorPosts, useUserQuery} from '@/hooks/useSocialQuery.ts';
 import type {Post as PostType} from '@/schemas.ts';
 import Post from "./post.tsx";
 import {LoaderCircle} from 'lucide-react';
-import {useSearchParams} from 'react-router';
+import {Link, useSearchParams} from 'react-router';
 import {useEffect, useMemo, useState} from 'react';
 import {Avatar, AvatarFallback, AvatarImage} from '@/components/ui/avatar.tsx';
 
@@ -86,9 +86,9 @@ function AuthorPosts() {
                 {posts.length === 0 && (
                     <p className="self-center text-center text-zinc-500 py-20">
                         Oops, looks like this author has no posts yet. <br/>
-                        <a href="/results/search" className="hover:text-zinc-900 dark:hover:text-zinc-100 underline">
+                        <Link to="/results/search" className="hover:text-zinc-900 dark:hover:text-zinc-100 underline">
                             Try exploring
-                        </a>
+                        </Link>
                     </p>
                 )}
 

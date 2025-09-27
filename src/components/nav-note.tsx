@@ -13,7 +13,7 @@ import {
 } from '@/components/ui/dropdown-menu.tsx';
 import {Forward, Heart, MoreHorizontal, Trash2} from 'lucide-react';
 import {useNoteStore} from '@/pages/note/hooks/useNoteStore.ts';
-import {useNavigate} from 'react-router';
+import {Link, useNavigate} from 'react-router';
 import {useDeleteNote} from '@/pages/note/hooks/useNoteMutations.ts';
 import type {Note} from '@/schemas.ts';
 
@@ -50,12 +50,12 @@ function NavNote({note}: { note: Note }) {
                 >
                     {note.isPublished && (
                         <>
-                            <a href={'/post/'+note.id}>
+                            <Link to={'/post/'+note.id}>
                             <DropdownMenuItem>
                                 <Forward className="h-4 w-4 text-muted-foreground"/>
                                 <span>View post</span>
                             </DropdownMenuItem>
-                            </a>
+                            </Link>
                             <DropdownMenuSeparator/>
                         </>
                     )}

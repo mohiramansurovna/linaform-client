@@ -61,9 +61,9 @@ export function LoginForm() {
 
                 <div className='flex items-center -mb-4'>
                     <FormLabel htmlFor='password'>Password</FormLabel>
-                    <a href='#' className='ml-auto text-sm underline-offset-2 hover:underline'>
+                    <Link to='#' className='ml-auto text-sm underline-offset-2 hover:underline'>
                         Forgot your password?
-                    </a>
+                    </Link>
                 </div>
                 <FormField
                     control={form.control}

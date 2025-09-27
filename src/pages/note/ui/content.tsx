@@ -1,7 +1,6 @@
 import {useNoteSyncLocal} from "@/pages/note/hooks/useNoteSyncLocal.ts";
 import {useEffect} from 'react';
-import {EditorContent} from '@tiptap/react';
-import {useCurrentEditor} from '@tiptap/react';
+import {type Editor, EditorContent} from '@tiptap/react';
 import {useNoteQuery} from '../hooks/useNoteQuery.ts';
 import {useSyncFonts} from '@/hooks/useSyncFonts.ts';
 import {remapColors} from '@/lib/normalize-colors.ts';
@@ -17,10 +16,10 @@ import {LoadingSmall} from '@/components/loading.tsx';
  * that no note is selected.
  */
 
-export default function Content() {
+export default function Content({editor}:{editor:Editor}) {
     const {data: note, isLoading, isError} = useNoteQuery();
-    const {editor} = useCurrentEditor();
-    const {getLocalSync} = useNoteSyncLocal();
+
+    const {getLocalSync} = useNoteSyncLocal(editor);
     const {syncFonts} = useSyncFonts();
     const {theme} = useThemeStore();
 
@@ -62,11 +61,11 @@ export default function Content() {
     return editor && note && (
         <LoadingSmall isLoading={isLoading}>
             <div
-                className="min-h-[85vh] bg-card min-w-2/3 max-w-[75vw] overflow-x-hidden self-center px-6 py-4 my-2 shadow-2xl cursor-text"
+                className="min-h-[85vh] relative bg-card min-w-2/3 max-w-[75vw] overflow-x-hidden self-center px-6 py-4 my-2 shadow-2xl cursor-text"
                 onClick={() => editor?.chain().focus().run()}>
                 <EditorContent
                     editor={editor}
-                    className="
+                   className="
   [&_.ProseMirror]:focus:outline-none
   [&_.ProseMirror]:text-base
   [&_.ProseMirror]:text-primary

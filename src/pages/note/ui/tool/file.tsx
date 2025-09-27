@@ -7,6 +7,7 @@ import {ChevronsRight, CircleMinus, FilePen,} from 'lucide-react';
 import {AnimatePresence, motion} from 'framer-motion';
 import type {Editor} from '@tiptap/react';
 import {LoadingButton} from '@/components/loading.tsx';
+import { Link } from 'react-router';
 
 export default function File({editor}:{editor:Editor}) {
     const {data: note} = useNoteQuery();
@@ -48,11 +49,11 @@ export default function File({editor}:{editor:Editor}) {
                                 Unpublish
                             </LoadingButton>
 
-                            <a href={'/post/' + note.id}>
+                            <Link to={'/post/' + note.id}>
                                 <Button className='h-full' disabled={!updateNote.isSuccess} variant="ghost">
                                     View Post <ChevronsRight className="inline size-5"/>
                                 </Button>
-                            </a>
+                            </Link>
                         </motion.div>
                     ) : (
                         <motion.div

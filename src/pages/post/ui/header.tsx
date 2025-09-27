@@ -20,12 +20,12 @@ function Header() {
     if (!post) return null;
     return (
         <header className="max-w-3xl mx-auto py-6 border-b border-zinc-200 dark:border-zinc-700 flex justify-between items-start">
-            <div>
+            <div className='w-full'>
                 <h1 className="text-3xl font-bold mb-2 text-zinc-900 dark:text-zinc-100">
                     {post.title}
                 </h1>
                 <div className="flex items-center gap-2 text-zinc-600 dark:text-zinc-400 text-sm">
-                    <button onClick={()=>setSelectedUserId(post.user.id)} className="font-medium">{post.user.username}</button>
+                    <button onClick={()=>setSelectedUserId(post.user.id)} className="font-medium cursor-pointer">{post.user.username}</button>
                     <span>•</span>
                     <span>
         {new Date(post.publishedAt).toLocaleDateString("en-GB", {
@@ -36,7 +36,7 @@ function Header() {
       </span>
                 </div>
                 {post.description && (
-                    <p className="mt-4 text-zinc-700 dark:text-zinc-300">
+                    <p className="mt-4 text-zinc-700 dark:text-zinc-300 w-full line-clamp-3">
                         {post.description}
                     </p>
                 )}
