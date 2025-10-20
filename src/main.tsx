@@ -8,14 +8,12 @@ import {queryClient} from './lib/react-query';
 
 //@ts-expect-error; i really dont know why it is not working
 import "./index.css";
-import UserDialog from '@/components/user-dialog.tsx';
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
         <QueryClientProvider client={queryClient}>
-            <RouterProvider router={router} />
+            <RouterProvider router={router}/>
             {/*<ReactQueryDevtools initialIsOpen={false} />*/}
-            <UserDialog/>
         </QueryClientProvider>
     </StrictMode>
 );

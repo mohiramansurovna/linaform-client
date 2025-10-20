@@ -1,58 +1,59 @@
-import { NotebookText, LayoutDashboard, BellRing, ShieldCheck } from 'lucide-react';
+import { PenTool, LayoutTemplate, Share2, Globe } from 'lucide-react';
 
 export default function RegisterText() {
     return (
         <section className='hidden lg:block col-span-3 pr-12'>
             <h1 className='scroll-m-20 text-4xl font-bold tracking-tight text-balance'>
-                Create Your Free Account
+                Start Writing with Linaform
             </h1>
             <p className='leading-7 mt-3'>
-                Take control of your learning journey with one dashboard built just for students.
+                Express your ideas, publish seamlessly, and share your thoughts with the world.
             </p>
-            <div className='mt-6 ml-6 flex items-center '>
-                <NotebookText className='text-foreground m-3 mt-0' />
+
+            <div className='mt-6 ml-6 flex items-center'>
+                <PenTool className='text-foreground m-3 mt-0' />
                 <div>
                     <h4 className='scroll-m-20 text-xl font-semibold tracking-tight'>
-                        Organized Learning
+                        Write Naturally
                     </h4>
                     <p className='leading-7'>
-                        Track assignments, deadlines, and progress in one place — stay ahead without
-                        the stress.
+                        Enjoy a smooth, distraction-free writing experience that keeps your creativity flowing.
                     </p>
                 </div>
             </div>
+
             <div className='mt-6 ml-6 flex items-center'>
-                <LayoutDashboard className='text-foreground m-3 mt-0' />
+                <LayoutTemplate className='text-foreground m-3 mt-0' />
                 <div>
                     <h4 className='scroll-m-20 text-xl font-semibold tracking-tight'>
-                        Personalized Dashboard
+                        Customize Your Pages
                     </h4>
                     <p className='leading-7'>
-                        Customize your space with subjects, schedules, and goals that match your
-                        study style.
+                        Format, style, and structure your content effortlessly for a polished and professional look.
                     </p>
                 </div>
             </div>
+
             <div className='mt-6 ml-6 flex items-center'>
-                <BellRing className='text-foreground m-3 mt-0' />
+                <Share2 className='text-foreground m-3 mt-0' />
                 <div>
                     <h4 className='scroll-m-20 text-xl font-semibold tracking-tight'>
-                        Smart Notifications
+                        Publish & Share
                     </h4>
                     <p className='leading-7'>
-                        Never miss a class, deadline, or update with real-time alerts and reminders.
+                        Share your writings instantly with your audience, friends, or the wider Linaform community.
                     </p>
                 </div>
             </div>
+
             <div className='mt-6 ml-6 flex items-center'>
-                <ShieldCheck className='text-foreground m-3 mt-0' />
+                <Globe className='text-foreground m-3 mt-0' />
                 <div>
                     <h4 className='scroll-m-20 text-xl font-semibold tracking-tight'>
-                        Secure and Private
+                        Reach the World
                     </h4>
                     <p className='leading-7'>
-                        Your academic data is protected with strong encryption and student-focused
-                        privacy features.
+                        Get your ideas seen by anyone, anywhere — Linaform makes publishing simple and global.
                     </p>
                 </div>
             </div>

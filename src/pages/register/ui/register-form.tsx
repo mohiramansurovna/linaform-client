@@ -1,8 +1,8 @@
 import {useForm} from 'react-hook-form';
 import {z} from 'zod';
 import {zodResolver} from '@hookform/resolvers/zod';
-import {Button} from '../../../components/ui/button';
-import {Input} from '../../../components/ui/input';
+import {Button} from '@/components/ui/button.tsx';
+import {Input} from '@/components/ui/input.tsx';
 import {
     Form,
     FormControl,
@@ -10,12 +10,14 @@ import {
     FormItem,
     FormLabel,
     FormMessage,
-} from '../../../components/ui/form';
+} from '@/components/ui/form.tsx';
 import {Link} from 'react-router';
 import {RegisterSchema} from '@/schemas';
 import {useRegisterMutation} from '../hooks/useRegisterMutation';
 import FormError from '@/components/form-error';
 import FormSuccess from '@/components/form-success';
+import {Eye, EyeOff} from 'lucide-react';
+import {useState} from 'react';
 
 export function RegisterForm() {
     const form = useForm<z.infer<typeof RegisterSchema>>({
@@ -30,7 +32,7 @@ export function RegisterForm() {
     const onSubmit = (data: z.infer<typeof RegisterSchema>) => {
         registerMutation.mutate(data);
     };
-
+    const [showPassword, setShowPassword] = useState(false);
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className='p-6 md:p-8 flex flex-col gap-6'>
@@ -72,7 +74,15 @@ export function RegisterForm() {
                         <FormItem>
                             <FormLabel htmlFor='password'>Password</FormLabel>
                             <FormControl>
-                                <Input id='password' type='password' {...field} />
+                                <div className='relative'>
+                                    <Input id="password" type={showPassword ? "text" : "password"} {...field} />
+                                    <button
+                                        type="button"
+                                        onClick={() => setShowPassword((prev) => !prev)}
+                                        className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500 hover:text-gray-700"
+                                    >
+                                        {showPassword ? <Eye className="h-5 w-5"/> : <EyeOff className="h-5 w-5"/>}
+                                    </button></div>
                             </FormControl>
                             <FormMessage />
                         </FormItem>

@@ -2,13 +2,14 @@ import {usePostQuery} from '@/pages/post/hooks/usePostQuery.ts';
 import {useSyncFonts} from '@/hooks/useSyncFonts.ts';
 import {useEffect, useMemo} from 'react';
 import {generateHTML} from '@tiptap/react';
-import StarterKit from '@tiptap/starter-kit';
-import Highlight from '@tiptap/extension-highlight';
-import Placeholder from '@tiptap/extension-placeholder';
-import TextAlign from '@tiptap/extension-text-align';
+import {StarterKit} from '@tiptap/starter-kit';
+import {Highlight} from '@tiptap/extension-highlight';
+import {Placeholder} from '@tiptap/extension-placeholder';
+import {TextAlign} from '@tiptap/extension-text-align';
 import {BackgroundColor, Color, FontSize, TextStyle} from '@tiptap/extension-text-style';
-import FontFamily from '@tiptap/extension-font-family';
-import Image from '@tiptap/extension-image';
+import {FontFamily} from '@tiptap/extension-font-family';
+import {Image} from '@tiptap/extension-image';
+import {Markdown} from "@tiptap/markdown";
 import {remapColors} from '@/lib/normalize-colors.ts';
 import {useThemeStore} from '@/hooks/useThemeStore.ts';
 import {LoadingSmall} from '@/components/loading.tsx';
@@ -35,11 +36,11 @@ function Content() {
      * so the react-query still sends the old cached post.content.
      */
 
-    //normalize colors for theme
+        //normalize colors for theme
     const remappedContent = useMemo(() => {
-        if (!post || !post.content) return;
-        return remapColors(post.content, theme == 'dark');
-    }, [post, theme]);
+            if (!post || !post.content) return;
+            return remapColors(post.content, theme == 'dark');
+        }, [post, theme]);
 
     if (post && remappedContent) {
         const html = generateHTML(remappedContent, [
@@ -52,7 +53,8 @@ function Content() {
             FontSize,
             Color,
             BackgroundColor,
-            Image]);
+            Image,
+            Markdown]);
         return (
             <LoadingSmall isLoading={isLoading}>
                 <main

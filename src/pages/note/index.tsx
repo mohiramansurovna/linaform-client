@@ -2,12 +2,13 @@ import ToolBarMenu from "@/pages/note/ui/toolbar.tsx";
 import Content from '@/pages/note/ui/content.tsx';
 import {useNoteStore} from '@/pages/note/hooks/useNoteStore.ts';
 import {SquareDashedMousePointer} from 'lucide-react';
-import StarterKit from '@tiptap/starter-kit';
-import Highlight from '@tiptap/extension-highlight';
-import TextAlign from '@tiptap/extension-text-align';
+import {StarterKit} from '@tiptap/starter-kit';
+import {Highlight} from '@tiptap/extension-highlight';
+import {TextAlign} from '@tiptap/extension-text-align';
 import {BackgroundColor, Color, FontSize, TextStyle} from '@tiptap/extension-text-style';
-import FontFamily from '@tiptap/extension-font-family';
-import Image from '@tiptap/extension-image';
+import {FontFamily} from '@tiptap/extension-font-family';
+import {Image} from '@tiptap/extension-image';
+import {Markdown} from "@tiptap/markdown"
 import {useEditor} from '@tiptap/react';
 export default function NotesPage() {
     const {selectedNoteId} = useNoteStore();
@@ -22,7 +23,8 @@ export default function NotesPage() {
             FontSize,
             Color,
             BackgroundColor,
-            Image,]
+            Image,
+            Markdown]
     });
     return editor&&(
         <>

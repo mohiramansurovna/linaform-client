@@ -4,7 +4,7 @@ import {
     SidebarGroup,
     SidebarGroupLabel,
     SidebarMenu,
-    SidebarMenuButton, SidebarMenuItem, SidebarSeparator,
+    SidebarMenuButton, SidebarMenuItem, SidebarSeparator, useSidebar,
 } from '../components/ui/sidebar';
 import type {Dispatch, SetStateAction} from 'react';
 import {useNavigate} from 'react-router';
@@ -54,9 +54,10 @@ export function NavPosts() {
 }
 
 export function Posts({setNav, nav}: { setNav: Dispatch<SetStateAction<'notifications' | 'notes' | 'posts'>>, nav: "notes" | string }) {
+    const {setOpen} =useSidebar();
     return (
         <button
-            onClick={() => setNav('posts')}
+            onClick={() => {setNav('posts'); setOpen(true)}}
             className="place-items-center rounded-2xl size-8  shadow-md transition hover:scale-105 hover:bg-zinc-200 dark:hover:bg-zinc-700"
             title="Posts"
         >

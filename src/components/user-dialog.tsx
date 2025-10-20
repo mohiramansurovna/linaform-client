@@ -12,6 +12,7 @@ import {useUserQuery} from '@/hooks/useSocialQuery.ts';
 import {Skeleton} from '@/components/ui/skeleton.tsx';
 import {useFollowMutation, useUnfollowMutation} from '@/hooks/useSocialMutations.ts';
 import {useAuthStore} from '@/pages/dashboard/hooks/useAuthStore.ts';
+import {useNavigate} from 'react-router';
 
 function UserDialog() {
     const {selectedUserId, setSelectedUserId} = useUserStore();
@@ -21,7 +22,7 @@ function UserDialog() {
     const followMutation = useFollowMutation();
     const unfollowMutation = useUnfollowMutation();
     const isFollowed = data?.followers.some(f => f.id === user?.id) ?? false;
-
+    const navigate = useNavigate();
     return (
         <Dialog
             open={!!selectedUserId}
@@ -78,7 +79,9 @@ function UserDialog() {
                         </div>
                     </div>
                 </DialogHeader>
-                <DialogDescription></DialogDescription>
+                <DialogDescription>
+                    <button onClick={()=>navigate('/results/author?authorId='+selectedUserId)}>Go to {data?.username}'s posts</button>
+                </DialogDescription>
 
                 {user &&
                     <DialogFooter className="flex justify-end gap-3">
@@ -89,7 +92,8 @@ function UserDialog() {
                             Cancel
                         </Button>
 
-                        <Button
+                        {user.id!=selectedUserId &&
+                            <Button
                             disabled={isFollowed ? unfollowMutation.isPending : followMutation.isPending}
                             onClick={() => {
                                 if (!selectedUserId) return;
@@ -101,7 +105,7 @@ function UserDialog() {
                             }}
                         >
                             {isFollowed ? "Unfollow" : "Follow"}
-                        </Button>
+                        </Button>}
                     </DialogFooter>
                 }
             </DialogContent>

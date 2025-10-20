@@ -35,6 +35,7 @@ export default function Insert({editor}: {editor: Editor}) {
             <LinkDialog
                 open={linkDialog}
                 onOpenChange={setLinkDialog}
+                editor={editor}
                 defaultValue={{
                     url: editor.getAttributes('link').href || '',
                     color:

@@ -29,7 +29,7 @@ function AuthDialog({
                     You need to sign in to like, subscribe, or post a comment.
                 </p>
                 <img
-                    src={"/auth-dialog.svg"}
+                    src={"/linaform-client/auth-dialog.svg"}
                     alt="Sign in required"
                     className="mx-auto w-1/2"
                 />

@@ -21,11 +21,8 @@ function Footer() {
             )}
 
             {similarPosts && similarPosts.length > 0 && (
-                <ul className="mt-6 flex flex-col gap-6">
-                    {similarPosts.map((post) => (
-                        <Post key={post.id} post={post}/>
-                    ))}
-                </ul>
+                <Post containerClassName={"mt-6 flex flex-col gap-6"} posts={similarPosts}/>
+
             )}
         </footer>
     );

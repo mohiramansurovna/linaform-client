@@ -9,7 +9,7 @@ import {Input} from '@/components/ui/input.tsx';
 import {Button} from '@/components/ui/button.tsx';
 import React, {useState} from 'react';
 import {Label} from '@/components/ui/label.tsx';
-import { useCurrentEditor } from '@tiptap/react';
+import {type Editor} from '@tiptap/react';
 
 function LinkDialog({
     open,
@@ -18,7 +18,8 @@ function LinkDialog({
     url: '',
     color: 'blue',
     underline: true,
-    }
+    },
+    editor
 }: {
     open: boolean;
     onOpenChange: (open: boolean) => void;
@@ -27,13 +28,12 @@ function LinkDialog({
         color: 'blue' | 'emerald' | 'amber' | 'gray' | 'purple';
         underline: boolean;
     };
+    editor:Editor
 }) {
-    const {editor}=useCurrentEditor();
     const [url, setUrl] = useState(defaultValue.url);
     const [color, setColor] = useState<'blue' | 'emerald' | 'amber' | 'gray' | 'purple'>(defaultValue.color);
     const [underline, setUndeline] = useState(defaultValue.underline);
     const addLink = (inside: {url: string | null; color: string; underline: boolean} | null) => {
-        if (!editor) return;
         editor.chain().focus();
         if (inside?.url) {
             editor
@@ -41,7 +41,7 @@ function LinkDialog({
                 .focus()
                 .setLink({
                     href: inside.url,
-                    class: `text-${inside.color}-500 ${inside.underline ? 'underline' : ''}`,
+                    class: `text-${inside.color}-500 ${inside.underline ? '' : 'underline'}`,
                 })
                 .run();
         } else {

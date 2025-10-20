@@ -6,7 +6,7 @@ import {
     SidebarGroupLabel,
     SidebarMenu,
     SidebarMenuButton,
-    SidebarMenuItem, SidebarSeparator,
+    SidebarMenuItem, SidebarSeparator, useSidebar,
 } from '../components/ui/sidebar';
 import {useNotesQuery, useNotesSearchQuery} from '@/pages/note/hooks/useNotesQuery';
 import {useState} from 'react';
@@ -101,9 +101,10 @@ export function Notes({setNav, nav}: {
     nav: 'notes' | string;
 }) {
     const isActive = nav === 'notes';
+    const {setOpen} =useSidebar()
     return (
         <button
-            onClick={() => setNav('notes')}
+            onClick={() =>{ setNav('notes'); setOpen(true)}}
             title="Notes"
             className={`
         grid place-items-center size-8 rounded-2xl shadow-md transition

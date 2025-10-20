@@ -6,6 +6,8 @@ import {useAuthStore} from './hooks/useAuthStore';
 import {Outlet} from 'react-router';
 import {useNotificationStore} from '@/hooks/useNotificationStore.ts';
 import AuthRibbon from '@/components/auth-ribbon.tsx';
+import UserDialog from '@/components/user-dialog.tsx';
+import CheckServer from '@/components/check-server.tsx';
 
 export default function DashboardPage() {
     const {clearAuth, setToken, isAuthenticated} = useAuthStore();
@@ -27,7 +29,9 @@ export default function DashboardPage() {
     if (!isAuthenticated)
         return (
             <>
+                <CheckServer/>
                 <AuthRibbon/>
+                <UserDialog/>
                 <Outlet/>
             </>
         );
@@ -37,6 +41,8 @@ export default function DashboardPage() {
             <SidebarInset>
                 <Outlet/>
             </SidebarInset>
+            <UserDialog/>
+            <CheckServer/>
         </SidebarProvider>
     );
 }

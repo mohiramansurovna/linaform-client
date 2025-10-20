@@ -5,6 +5,7 @@ import {Input} from '@/components/ui/input.tsx';
 import {Button} from '@/components/ui/button.tsx';
 import {SearchInput} from '@/components/search-input.tsx';
 import {useState} from 'react';
+import {useAuthStore} from '@/pages/dashboard/hooks/useAuthStore.ts';
 
 function SearchPosts() {
     const {data, isLoading, hasNextPage, fetchNextPage, isFetchingNextPage} = usePopularGlobalPosts();
@@ -19,31 +20,27 @@ function SearchPosts() {
     } = useSearchGlobalPosts(term);
 
     const searchPosts = searchData?.pages.flatMap((page) => page.posts) ?? [];
-
+    const {isAuthenticated} = useAuthStore()
     return (
-        <div className="flex flex-col w-full px-6 md:px-20 py-10 gap-6">
-            <div className="flex flex-col items-center gap-8">
-                <h1 className="text-5xl font-delius-swash-caps text-zinc-800 dark:text-zinc-100">
+        <div className="flex flex-col items-center w-full h-full">
+            <div style={{marginTop:isAuthenticated?0:60}} className="fixed top-0 w-[70%] bg-background h-40 flex flex-col justify-around items-center ">
+            <h1 className="text-5xl font-delius-swash-caps text-zinc-800 dark:text-zinc-100">
                     Linaform
-                </h1>
+            </h1>
                 <SearchInput value={term ?? ''} setValue={setTerm} Component={Input} containerClassName={"w-full max-w-xl"} classname={"rounded-full"}
                              placeholder={"Search for posts"}/>
             </div>
 
-            <div className="flex flex-col gap-4 mt-6">
+            <div className="flex flex-col gap-4 mt-46 w-[70%]">
                 {(isLoading || isSearchLoading) && (
                     <div className="flex justify-center items-center h-[60vh]">
                         <LoaderCircle className="h-10 w-10 animate-spin text-zinc-500"/>
                     </div>
                 )}
-                {!term && posts?.map((post) => (
-                    <Post post={post} key={post.id}/>
-                ))}
-                {term && searchPosts?.map((post) => (
-                    <Post post={post} key={post.id}/>
-                ))}
+                {!term && posts && <Post posts={posts} containerClassName='flex-1 overflow-y-auto'/>}
+                {term && searchPosts &&<Post posts={posts} containerClassName='flex-1 overflow-y-auto'/>}
 
-                {(term && searchPosts.length === 0) || (!term && posts.length === 0) && (
+                {(!isSearchLoading && term && searchPosts.length === 0) || (!isLoading&& !term && posts.length === 0) && (
                     <p className="self-center text-center mt-20 text-zinc-500">
                         Oops, there is no result for your search.
                         <br/>

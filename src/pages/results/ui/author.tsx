@@ -35,53 +35,47 @@ function AuthorPosts() {
     }
 
     return (
-        <div className="flex flex-col gap-8 w-full mx-auto px-20">
-            <header className="flex items-center gap-6 w-full mt-10">
-                <Avatar className='size-20 rounded-full'>
-                    <AvatarImage src={'https://cdn.culture.ru/images/becb4d30-310b-5a5b-94be-56e086848ebf'} alt={author?.username} />
-                    <AvatarFallback className='rounded-lg'>CN</AvatarFallback>
-                </Avatar>
-                <div className="flex flex-col gap-2">
-                    <h1 className="text-2xl font-semibold">{author?.username}</h1>
-                    <div className="flex gap-6 text-zinc-500 text-sm">
-            <span>
-              <strong className="text-zinc-900 dark:text-zinc-100">{posts.length}</strong> Posts
-            </span>
-                        <span>
-              <strong className="text-zinc-900 dark:text-zinc-100">{author?.followers.length ?? 0}</strong> Subscribers
-            </span>
+        <>
+            <header className=' bg-background fixed w-[calc(100%-64px)] px-16 h-38 top-0'>
+                <div className="flex items-center gap-6 w-full mt-10">
+                    <Avatar className="size-20 rounded-full">
+                        <AvatarImage src={'https://cdn.culture.ru/images/becb4d30-310b-5a5b-94be-56e086848ebf'} alt={author?.username}/>
+                        <AvatarFallback className="rounded-lg"> CN</AvatarFallback>
+                    </Avatar>
+                    <div className="flex flex-col gap-2">
+                        <h1 className="text-2xl font-semibold">{author?.username}</h1>
+                        <div className="flex gap-6 text-zinc-500 text-sm">
+                            <span><strong className="text-zinc-900 dark:text-zinc-100">{posts.length}</strong> Posts</span>
+                            <span><strong className="text-zinc-900 dark:text-zinc-100">{author?.followers.length ?? 0}</strong> Subscribers</span>
+                        </div>
                     </div>
                 </div>
+                <nav className="flex justify-center gap-6 border-b border-zinc-200 dark:border-zinc-800 text-sm">
+                    <button
+                        onClick={() => setFilter("recent")}
+                        className={`pb-2 transition-colors ${
+                            filter === "recent"
+                                ? "border-b-2 border-zinc-900 dark:border-zinc-100 text-zinc-900 dark:text-zinc-100"
+                                : "text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100"
+                        }`}
+                    >
+                        Recent
+                    </button>
+                    <button
+                        onClick={() => setFilter("popular")}
+                        className={`pb-2 transition-colors ${
+                            filter === "popular"
+                                ? "border-b-2 border-zinc-900 dark:border-zinc-100 text-zinc-900 dark:text-zinc-100"
+                                : "text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100"
+                        }`}
+                    >
+                        Popular
+                    </button>
+                </nav>
             </header>
+            <section className="flex mt-40 flex-col px-16 gap-4">
+                <Post posts={posts} containerClassName="flex-1 overflow-y-auto"/>
 
-            <nav className="flex justify-center gap-6 border-b border-zinc-200 dark:border-zinc-800 text-sm">
-                <button
-                    onClick={() => setFilter("recent")}
-                    className={`pb-2 transition-colors ${
-                        filter === "recent"
-                            ? "border-b-2 border-zinc-900 dark:border-zinc-100 text-zinc-900 dark:text-zinc-100"
-                            : "text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100"
-                    }`}
-                >
-                    Recent
-                </button>
-                <button
-                    onClick={() => setFilter("popular")}
-                    className={`pb-2 transition-colors ${
-                        filter === "popular"
-                            ? "border-b-2 border-zinc-900 dark:border-zinc-100 text-zinc-900 dark:text-zinc-100"
-                            : "text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100"
-                    }`}
-                >
-                    Popular
-                </button>
-            </nav>
-
-            {/* --- Posts Section --- */}
-            <section className="flex flex-col gap-4">
-                {posts.map((post) => (
-                    <Post post={post} key={post.id}/>
-                ))}
 
                 {posts.length === 0 && (
                     <p className="self-center text-center text-zinc-500 py-20">
@@ -102,8 +96,9 @@ function AuthorPosts() {
                     </button>
                 )}
             </section>
-        </div>
-    );
+        </>
+    )
+        ;
 }
 
 export default AuthorPosts;
